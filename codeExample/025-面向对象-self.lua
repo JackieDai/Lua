@@ -33,7 +33,7 @@ end
 print(t1.id,t1.name,t1.getId(t1),t1:getName());
 
 t2=t1;
---print(t1,t2);
+-- print(t1,t2);
 t1=nil;
 
 print(t2.id,t2.name,t2.getId(t2),t2:getName());

@@ -10,6 +10,7 @@
 function func22(...)
 
     sum=0;
+    select()
     count=select("#",...);
     for i=1,count do
         sum = sum + ((select(i,...)));
@@ -39,7 +40,7 @@ end
 --[[
 print(  func33()  );
 print(  func44()  );
-print("");
+print(""); 
 print( (func33())  );
 print( (func44())  );
 print("");

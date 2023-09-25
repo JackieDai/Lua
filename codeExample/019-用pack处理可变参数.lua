@@ -9,7 +9,7 @@
 function func22(...)
 
 
-    --print(table.pack(...).n);
+    print(table.pack(...).n);
 
     t1=table.pack(...);
 
@@ -55,7 +55,7 @@ function func44(...)
 
     t1={...};
     count=#t1;
-    --print(count);
+    print(count);
 
     for k,v in pairs(t1) do
         --if k ~= "n" then

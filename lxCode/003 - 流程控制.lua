@@ -45,7 +45,7 @@ function ifOperation()
     -- test2()
 
     -- 复合 if 判断 02
-    -- 注意完成的  if else elseif end 的完成流程
+    -- 注意完整的  if else elseif end 的完成流程
     function test3()
         c,d=900,101;
         if c > 100 then

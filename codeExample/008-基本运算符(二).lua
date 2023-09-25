@@ -69,4 +69,4 @@ D=(A and B) or C;
 print(D);
 
 E=((A and {B}) or {C})[1];--这里才是一个合格的三目运算
-print(E);
+print(E,"ddddsddddeee");

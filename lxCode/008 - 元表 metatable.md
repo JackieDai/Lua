@@ -47,3 +47,74 @@ Otherwise, returns the metatable of the given object.
 
 ![](https://raw.githubusercontent.com/JackieDai/blogAssets/main/WX20230926-111208.png)
 
+```lua
+  t1 = {
+      id = 123,
+      name = "jackie"
+  }
+-- 访问 不存在的 索引，返回 nil
+  print(t1.age) -- nil
+
+  function indexIsTableType()
+      t1.age = 20
+      meta = {
+          __index = {
+              age = 18
+          }
+      }
+  		-- 因为上面给 t1 添加了 age 索引，并将给其赋值为20
+      print(t1.age) -- 20
+      setmetatable(t1,meta)
+  		-- 移除 索引： age
+      t1.age = nil
+  		-- 因为给t1 设置了元表，且__index 里 key = age, value = 18, 所以下面的log 为 18
+      print(t1.age) -- 18
+  end
+  indexIsTableType()
+
+	function indexIsFunctionType()
+      -- 设置 table 的key
+      t1.phone = "t1_phone"
+      meta = {
+          __index = function (table, key)
+              print(table, key)
+              table[key] = "new-phone"
+              return "index-phone"
+          end
+      }
+      -- 如果table自己有key 就会直接返回 value ,不会关meta
+      print(t1.phone) -- t1_phone
+      setmetatable(t1, meta)
+      print(t1.phone) -- t1_phone
+
+      -- 如果table 没有对应的key,就会从__index 里去找
+      t1.phone = nil
+      print(t1.phone) -- index-phone
+  end
+```
+
+## __newIndex
+
+__newindex 元方法用来对表更新，__index则用来对表访问 。
+
+> 当你给表的一个缺少的索引赋值，解释器就会查找__newindex 元方法：如果存在则调用这个函数而不进行赋值操作。
+
+```lua
+mymetatable = {}
+mytable = setmetatable({key1 = "value1"}, { __newindex = mymetatable })
+
+-- mytable 本身就有 key1 的元素，所以可以直接访问
+print(mytable.key1) -- value1
+
+-- newkey 不是 mytable 里的 key 索引,解释器就会查找__newindex 元方法：如果存在则调用这个函数而不进行赋值操作
+mytable.newkey = "新值2"
+print(mytable.newkey, mymetatable.newkey) -- 输出为 ： nil	新值2
+
+mytable.key1 = "新值1"
+print(mytable.key1,mymetatable.key1) -- 新值1	nil
+```
+
+
+
+
+

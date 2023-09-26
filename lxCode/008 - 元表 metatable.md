@@ -46,3 +46,4 @@ Otherwise, returns the metatable of the given object.
 ## __index
 
 ![](https://raw.githubusercontent.com/JackieDai/blogAssets/main/WX20230926-111208.png)
+

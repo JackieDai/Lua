@@ -52,7 +52,6 @@ function testIndexKey()
         id = 123,
         name = "jackie"
     }
-
     print(t1.age) -- nil
 
     function indexIsTableType()
@@ -122,18 +121,11 @@ function testNewIndex()
 
     end
 
-   
-        
-        
-
     mytable = setmetatable({key1 = "value1"}, {
         __newindex = function (mytable, key, value)
             print("key == ",key, "value", value)
-            --         rawset(mytable, key, "\""..value.."\"")
             -- 在不触发任何元方法的情况下 将 table[index] 设为 value。 table 必须是一张表， index 可以是 nil 与 NaN 之外的任何值。 value 可以是任何 Lua 值。 这个函数返回 table。
             rawset(mytable, key, "\""..value.."\"")
-
-            
         end
     })
 

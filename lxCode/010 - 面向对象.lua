@@ -38,8 +38,8 @@ function test2()
     end
 
     r = Rectangle:new(nil,10,20)
-    print(r.length)
-    r:printArea()
+    print(r.length) -- 10
+    r:printArea() -- 矩形面积为 	200
 
 end
 test2()

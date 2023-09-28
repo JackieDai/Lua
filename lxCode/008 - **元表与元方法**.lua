@@ -88,8 +88,11 @@ function testIndexKey()
         -- 如果table 没有对应的key,就会从__index 里去找
         t1.phone = nil
         print(t1.phone) -- index-phone
+
+        -- 之所以这里会变成 new-phone 是因为 在__index函数里已经 给 t1 设置 key 了
+        print(t1.phone) -- new-phone
     end
-    -- indexIsFunctionType()
+    indexIsFunctionType()
     
 
     
@@ -136,4 +139,32 @@ function testNewIndex()
     
 end
 
-testNewIndex()
+-- testNewIndex()
+
+function testNewIndex2()
+    t1 = {name = "rose", age = 18}
+    t2 = {}
+    meta = {}
+    setmetatable(t1,meta)
+
+    function test1()
+         -- 假设 meta 元表中没有 __newindex,在给 t1设置新的索引时，可以正常读取
+         t1.phone = 12345
+         print(t1.phone) -- 输出12345
+    end
+    -- test1()
+
+    function test2()
+        -- 给 meta 设置 __newindex的时候，会把新值 存储到 __newindex 索引中
+        meta.__newindex = t2
+        t1.phone = 12345
+        print(t1.phone) -- 此时输出 为 nil
+        -- 在看看 t2，由此可以证明 在给t1 设置新的index 的时候，其value 是存储在 __newindex 中的
+        print(t2.phone) -- 12345 
+    end
+    test2()
+   
+
+    
+end
+testNewIndex2()

@@ -8,10 +8,20 @@
 function testnil()
     a = nil
     print(type(a)) --nil
+
+    -- nil 做比较的时候，应该加上 双引号"
+
+    print(type(X))
+    print(type(X) == nil) -- false
+    print(type(X) == "nil") -- true
+
 end
 -- testnil()
 
 function testboolean()
+
+    -- lua 中 只有 false 和 nil 为假，其他均为真
+
     a = true
     b = 0
     c = 1
@@ -35,8 +45,17 @@ function testString()
     print("d == ", type(d)) -- d == 	string
     
 end
-
 -- testString()
+
+function opString()
+
+    -- 在对一个数字字符串上进行算术操作时，Lua 会尝试将这个数字字符串转成一个数字:
+
+    print("2" + 8) -- 10.0
+
+    print("2" + "6") -- 8.0
+end
+-- opString()
 
 --[[
     函数传参
@@ -110,6 +129,45 @@ end
 ]]
 
 function testTablePart()
+
+    -- 在 Lua 里，table 的创建是通过"构造表达式"来完成，最简单构造表达式是{}，用来创建一个空表。也可以在表里添加一些数据，直接初始化表:
+    function constructorTable()
+        -- create an empty table
+        local table1 = {}
+
+        print("table1 == ", table1) -- table: 0x7fcbe9f0e400
+
+        -- create an empty with initial values
+        local table2 = {"apple", "pear", "orange", "grape"}
+
+        print("table2 == ", table2) -- table: 0x7fcbe9f05d20
+    end
+    -- constructorTable()
+
+    -- lua 中的 table 其实是一个 “关联数组(associative array)”,数组的索引可以是 数字，或者字符串
+
+    function test1()
+        local a = {}
+
+        a["key"] = "value"
+
+        local key = 10
+
+        a[key] = 22
+        a[key] = a[key] + 11
+
+        for key, value in pairs(a) do
+            print(key..":"..value)
+        end
+        --[[
+            10:33
+            key:value
+        ]]
+    end
+    test1()
+
+
+
     function tableTest1()
         info = {
             id = 123,
@@ -257,9 +315,45 @@ function testTablePart()
         ]]
 
     end
-    tableTest2()
+    -- tableTest2()
 end
-testTablePart()
+-- testTablePart()
 
 
 
+
+
+function testLogicExp()
+    function test1()
+        if type(a) == "nil" then
+            print("a == nil") -- a == nil
+        end
+    end
+    -- test1()
+
+    function test2()
+        local a = 90
+        if a<90  then
+            print("just so so")
+        else
+            print("pretty cool")
+        end
+    end
+    -- test2()
+
+    function test3()
+        local a = 90
+        if a < 90 then
+            print("just so so")
+        elseif a > 90 then
+            print("pretty cool")
+        else
+            print("钢达标")
+        end
+    end
+
+    test3()
+
+end
+
+testLogicExp()

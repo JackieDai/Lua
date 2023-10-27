@@ -35,11 +35,26 @@
 
 function andOperation()
     a, b = 1, 2
+
+    -- 类似其他语言的 &&
+
     -- 如果 a 为 真，返回 逻辑表达式 返回 b 的值
     print(a and b) -- 2
 
     a = nil
     -- 如果 a 为 假，返回 a 的值，不再继续计算，不管b是啥
+
+
+    --[[
+
+        A && B
+
+        假设 A 为 false, 该(A && B)表达式 一定为 false ,所以返回 A 就可，
+
+        假设 A 为 真， 该(A && B)表达式 的值 也就 是 B 的值，
+
+    ]]
+
     print(a and b) --nil
 end
 -- andOperation()
@@ -52,6 +67,16 @@ function orOperation()
     c = nil
     -- 如果 c 不为真，则返回 d 
     print(c or d) -- false
+
+    --[[
+
+        A || B
+
+        假设 A 为 ture, 该(A || B)表达式 一定为 true ,所以返回 A 就可，
+
+        假设 A 为 false， 该(A || B)表达式 的值 也就 是 B 的值，
+
+    ]]
 end
 -- orOperation()
 

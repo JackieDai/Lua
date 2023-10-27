@@ -167,4 +167,43 @@ function testNewIndex2()
 
     
 end
-testNewIndex2()
+-- testNewIndex2()
+
+local function tableTest_a()
+    local myTable = {}
+    print("myTable的类型是：", type(myTable))
+
+    myTable[1] = "Lua"
+
+    myTable["wow"] = "修改前"
+
+    -- print("index == .1 的值", myTable.1)
+    print("myTable index == [1] 的值", myTable[1])
+
+    print("myTable index == .wow 的值", myTable.wow)
+    print("myTable index == [wow] 的值", myTable["wow"])
+
+
+    local myTableb = myTable
+
+    print("myTableb index == [1] 的值", myTableb[1])
+    print("myTableb index == .wow 的值", myTableb.wow)
+    print("myTableb index == [wow] 的值", myTableb["wow"])
+
+    myTableb.wow = "修改后"
+
+    myTable = nil
+
+    -- print("myTable index == .wow 的值", myTable.wow)
+    print("myTableb index == .wow 的值", myTableb.wow)
+
+end
+-- tableTest_a()
+
+
+local function testTableConcat()
+    local fruits = {"apple","banana","peach"}
+    print(table.concat(fruits))
+    print(table.concat(fruits,","))
+end
+testTableConcat()

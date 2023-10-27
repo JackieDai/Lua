@@ -152,7 +152,81 @@ function func4(...)
     ]]
 end
 
-func4(1,2,3,4)
+-- func4(1,2,3,4)
 
 
+---------------------
+--[[
+    Lua 函数可以接受可变数目的参数，和 C 语言类似，在函数参数列表中使用三点 ... 表示函数有可变的参数。
+]]
+local function add(...)
+    local sum = 0
 
+    for index, value in ipairs({...}) do   --> {...} 表示一个由所有变长参数构成的数组 
+        sum = sum + value
+    end
+
+    return sum
+end
+
+-- print(add(1,2,3,4,"5")) --15.0
+
+local function averageValue(...)
+    local sum = 0
+
+    local inputArgs = {...}
+
+    print(type(#inputArgs))
+
+    if #inputArgs == 0 then
+        assert(false, "参数个数不能为"..#inputArgs)
+    end
+
+    for index, value in ipairs(inputArgs) do   --> {...} 表示一个由所有变长参数构成的数组 
+        sum = sum + value
+    end
+
+    print("total input params:"..#inputArgs.."个数")
+
+    --[[
+
+    ]]
+
+    local argsCount = select("#",...)
+    print("argsCount == "..argsCount) -- argsCount5 == 5
+    print(type(argsCount)) -- nnumber
+
+    return sum / #inputArgs
+    
+end
+-- print(averageValue(1,2,3,4,"5"))
+
+
+--[[
+    有时候我们可能需要几个固定参数加上可变参数，固定参数必须放在变长参数之前:
+]]
+
+local function fwrite(fmt, ...)
+
+    return io.write(string.format(fmt, ...))
+    
+end
+
+fwrite("runoob")
+
+fwrite("-----\n")
+
+fwrite("%d%d\n", 1,2)
+
+--[[
+    - 遍历变长参数的时候只需要使用 {…}
+
+    - 然而变长参数可能会包含一些 nil，那么就可以用 select 函数来访问变长参数了：select('#', …) 或者 select(n, …)
+]]
+
+
+--------------------------
+
+--[[
+    迭代器
+]]

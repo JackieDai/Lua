@@ -83,4 +83,30 @@ function functionInTable()
 end
 
 
-functionInTable()
+-- functionInTable()
+local function testArray()
+    local myArray = {10, 20, 30, 40, 50}
+    for i = 1, #myArray, 1 do
+        print(myArray[i],'i == '..i)
+    end
+end
+-- testArray()
+
+
+local function testPairs()
+    local array = {"Google", "Runoob"}
+
+    for key, value in pairs(array) do
+        print(key, value)
+    end
+
+    --[[
+        1	Google
+        2	Runoob
+    ]]
+
+    for key, value in ipairs(array) do
+        print(key, value)
+    end
+end
+testPairs()

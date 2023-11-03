@@ -206,4 +206,8 @@ local function testTableConcat()
     print(table.concat(fruits))
     print(table.concat(fruits,","))
 end
-testTableConcat()
+-- testTableConcat()
+
+
+-----------metaTable
+

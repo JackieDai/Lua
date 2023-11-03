@@ -20,6 +20,11 @@ end
 -- test1()
 
 function test2()
+
+    --[[
+        使用 “:“ 来访问成员函数
+    ]]
+
     -- 元类
     Rectangle = {area = 0, length = 0, breadth = 0}
     function Rectangle:new(o,length,breadth)
@@ -42,4 +47,4 @@ function test2()
     r:printArea() -- 矩形面积为 	200
 
 end
-test2()
+-- test2()

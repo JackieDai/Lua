@@ -159,4 +159,88 @@ local function testMetaTableNewIndexRawset()
 
 end
 
-testMetaTableNewIndexRawset()
+-- testMetaTableNewIndexRawset()
+
+
+local function testMetableIndexFunc()
+
+    local originTable =  {key1 = "value1"}
+
+    local metaTable = {
+        __index = function (mytable, key)
+            if key == "key2" then
+                return "metaTableValue"
+            else
+                return nil
+            end
+
+        end
+    }
+
+    local mytable = setmetatable(originTable,metaTable)
+
+    local table = getmetatable(mytable)
+
+    print(mytable) -- originTableAddress: 0x7fbcd000c620
+    print(table) -- metaTableAddress 0x7fbcd000c660
+    print(originTable) --  originTableAddress: 0x7fbcd000c620
+    print(metaTable) -- metaTableAddress 0x7fbcd000c660
+
+    print(mytable.key1, mytable.key2)
+    
+end
+-- testMetableIndexFunc()
+
+
+local function testNewIndexMetaTable()
+
+    local metaTable = {}
+    local mytable = setmetatable({key1 = "value1"}, {__newindex = metaTable})
+
+    print(mytable.key1) -- value1
+
+    mytable.newkey = "new value 2"
+    print(mytable.newkey, metaTable.newkey) --  nil 	new value 2
+
+    mytable.key1 = "new value 1"
+    print(mytable.key1, metaTable.newkey1) -- new value 1	nil
+    
+    --[[
+        if a key exists in the main table, it just updates it.
+
+        When a key is not available in the maintable(here, maintable represent {key1 == "value1"})， it adds that key to the metatable 
+
+        if you want to update the same table using rawset function
+    ]]
+end
+-- testNewIndexMetaTable()
+
+--[[ 
+    if you want to update the same table using rawset function
+]]
+local function updateTheSameTableUSingNewIndex()
+
+    local originTable = {key1 = "value"}
+    local metaTable = {
+        __index = function (t,k)
+            if k == "key2" then
+                print("key2")
+                return "value2"
+            end
+        end,
+
+        __newindex = function (t,k,v)
+            print(k)
+            rawset(t,k,v)
+        end
+    }
+
+    local table = setmetatable(originTable, metaTable)
+
+    table.key1 = "new value"
+    -- table.key2 = 4
+    table.key3 = "value3"
+
+    print(table.key1,table.key2, table.key3)
+end
+updateTheSameTableUSingNewIndex()

@@ -41,4 +41,16 @@ local function testDesicionMakingStatsments()
     end
 end
 
-testDesicionMakingStatsments()
+-- testDesicionMakingStatsments()
+
+local array = {}
+
+for i = -2, 2, 1 do
+    array[i] = i * 2
+end
+
+print(array)
+
+for i = -2, 2, 1 do
+    print(array[i])
+end

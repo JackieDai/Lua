@@ -5,9 +5,9 @@
 
 -- Account.withdraw(100.00)
 
-function test1()
+local function test1()
 
-    Account = { balance = 0 }
+    local Account = { balance = 0 }
     function Account.withdraw(v)
         Account.balance = Account.balance - v
     end
@@ -19,14 +19,14 @@ function test1()
 end
 -- test1()
 
-function test2()
+local function test2()
 
     --[[
         使用 “:“ 来访问成员函数
     ]]
 
     -- 元类
-    Rectangle = {area = 0, length = 0, breadth = 0}
+    local Rectangle = {area = 0, length = 0, breadth = 0}
     function Rectangle:new(o,length,breadth)
         o = o or {}
         setmetatable(o, self)
